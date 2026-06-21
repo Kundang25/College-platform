@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# College Discovery Platform
 
-## Getting Started
+Next.js MVP for searching, filtering, comparing, and saving colleges from the bundled JSON dataset.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What is included
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- College listing with search, state/type filters, fee slider, and sorting
+- College detail pages
+- Dedicated compare page for up to 4 colleges
+- Saved colleges dashboard using browser local storage
+- Rank predictor tool with exam/category/quota inputs
+- Login/signup screens wired for Supabase Auth
+- Reviews, placement estimates, cutoff trends, and richer detail sections
+- Paginated `/api/colleges` endpoint plus college, compare, save, and review APIs
+- Supabase-ready schema and seed script
+- Local JSON fallback from `src/data/colleges.json`
 
-## Learn More
+## Supabase setup
 
-To learn more about Next.js, take a look at the following resources:
+1. Copy `.env.example` to `.env.local`.
+2. Add your Supabase project URL, anon/publishable key, and service role key.
+   Use the base project URL, not the REST API path:
+   `https://your-project-ref.supabase.co`
+3. In the Supabase SQL editor, run `supabase/schema.sql`.
+4. Seed the table:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run seed:supabase
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The service role key must stay server-side only. Do not expose it in client components or commit it to git.
 
-## Deploy on Vercel
+## Useful commands
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run build
+npm run seed:supabase
+```
